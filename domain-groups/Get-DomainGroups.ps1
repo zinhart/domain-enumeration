@@ -9,7 +9,6 @@ $SearchString = "LDAP://"
 $SearchString += $PDC + "/"
 $DistinguishedName = "DC=$($domainObj.Name.Replace('.', ',DC='))"
 $SearchString += $DistinguishedName
-$SearchString
 $Searcher = New-Object System.DirectoryServices.DirectorySearcher([ADSI]$SearchString)
 $objDomain = New-Object System.DirectoryServices.DirectoryEntry
 $Searcher.SearchRoot = $objDomain

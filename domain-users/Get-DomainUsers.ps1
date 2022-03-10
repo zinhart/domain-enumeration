@@ -9,7 +9,6 @@ $SearchString = "LDAP://"
 $SearchString += $PDC + "/"
 $DistinguishedName = "DC=$($domainObj.Name.Replace('.', ',DC='))"
 $SearchString += $DistinguishedName
-$SearchString
 <# The samAccountType is an attribute that all user, computer, and group objects have. We will filter users with 0x30000000 (decimal 805306368).
 #>
 $Searcher = New-Object System.DirectoryServices.DirectorySearcher([ADSI]$SearchString)
