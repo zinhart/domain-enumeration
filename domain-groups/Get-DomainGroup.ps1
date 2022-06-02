@@ -22,20 +22,25 @@ $Searcher.SearchRoot = $objDomain
 if($All -eq $true)
 {
   $Searcher.filter="(objectClass=Group)"
+  $Result = $Searcher.FindAll()
+  Foreach($obj in $Result)
+  {
+    $obj.Properties.name
+  }
 }
-elseif ($GroupName) 
+elseif (![string]::IsNullOrEmpty($GroupName)) 
 {
   $Searcher.filter="(name=$Groupname)"
+  $Result = $Searcher.FindAll()
+	Foreach($obj in $Result)
+	{
+		Foreach($prop in $obj.Properties)
+		{
+			$prop
+		}
+		Write-Host "------------------------"
+	}
 }
 else {
 	Write-Host 'Specify -All switch or supply a group name'
-}
-$Result = $Searcher.FindAll()
-Foreach($obj in $Result)
-{
-	Foreach($prop in $obj.Properties)
-	{
-		$prop
-	}
-	Write-Host "------------------------"
 }
