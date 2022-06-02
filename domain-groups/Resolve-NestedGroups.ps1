@@ -16,7 +16,7 @@ $SearchString += $DistinguishedName
 $Searcher = New-Object System.DirectoryServices.DirectorySearcher([ADSI]$SearchString)
 $objDomain = New-Object System.DirectoryServices.DirectoryEntry
 $Searcher.SearchRoot = $objDomain
-$Searcher.filter="(&(objectClass=group)(memberof:1.2.840.113556.1.4.1941:=$DN"
+$Searcher.filter="(&(objectClass=group)(memberof:1.2.840.113556.1.4.1941:=$DN))"
 $Result = $Searcher.FindAll()
 Foreach($obj in $Result)
 {
