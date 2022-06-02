@@ -3,6 +3,10 @@
 The LDAP Provider Path has the form of LDAP://HostName[:PortNumber][/DistinguishedName].
 We will also include the Primary Domain Controller(PDC) as this DC will have the most up to date information about user login and authentication.
 #>
+param (
+	[Parameter(Mandatory=$true, HelpMessage="Enter the groups DISTINGUISHED NAME")]
+    [string] $DN #Distinguished name
+    )
 $domainObj =[System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()
 $PDC = ($domainObj.PdcRoleOwner).Name
 $SearchString = "LDAP://"
@@ -12,7 +16,7 @@ $SearchString += $DistinguishedName
 $Searcher = New-Object System.DirectoryServices.DirectorySearcher([ADSI]$SearchString)
 $objDomain = New-Object System.DirectoryServices.DirectoryEntry
 $Searcher.SearchRoot = $objDomain
-$Searcher.filter="(&(objectClass=group)(memberof:1.2.840.113556.1.4.1941:=<distinguished name found from the Specific group script above>"
+$Searcher.filter="(&(objectClass=group)(memberof:1.2.840.113556.1.4.1941:=$DN"
 $Result = $Searcher.FindAll()
 Foreach($obj in $Result)
 {
