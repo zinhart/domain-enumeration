@@ -1,5 +1,5 @@
 <# 
-THIS SCRIPT MUST BE RUN FROM A DOMAIN JOINED ACCOUNT
+THIS SCRIPT MUST BE RUN FROM A DOMAIN JOINED ACCOUNT (or atleast an account with valid kerberos tickets so that we are in the security context of a domain)
 Generate LDAP Provider Path That will input into the Directory Searcher
 The LDAP Provider Path has the form of LDAP://HostName[:PortNumber][/DistinguishedName].
 We will also include the Primary Domain Controller(PDC) as this DC will have the most up to date information about user login and authentication.
